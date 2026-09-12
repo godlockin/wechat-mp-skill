@@ -1,8 +1,19 @@
 # wechat-mp-skill
 
-**Full-coverage WeChat Official Account (微信公众号) API CLI & Agent Skill** — 134 endpoints, zero-dependency Python, built for AI agents.
+<div align="center">
+  <img src="docs/logo.png" width="160" alt="wechat-mp-skill logo"/>
+
+# 微信公众号全量 API CLI & Agent Skill
+
+**134 个端点 · 零依赖 Python · 破坏性操作防护 · 为 AI agent 而生**
 
 [中文](#中文) | [English](#english)
+
+`pip 之外无依赖` `clone 即用` `Claude Code / 任意 Agent 直调`
+
+---
+
+</div>
 
 ## 中文
 
