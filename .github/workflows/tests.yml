@@ -1,0 +1,21 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  unittest:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run unit tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Validate endpoint registry
+        run: python3 -c "import sys; sys.path.insert(0,'scripts'); import wechat_mp as w; errs = w.validate_endpoints(w.load_endpoints()); assert not errs, errs; print('registry ok:', len(w.load_endpoints()), 'endpoints')"

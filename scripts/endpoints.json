@@ -1,0 +1,1405 @@
+{
+  "draft_count": {
+    "name": "获取草稿的总数",
+    "method": "GET",
+    "path": "/cgi-bin/draft/count",
+    "category": "草稿管理",
+    "params": [],
+    "destructive": false
+  },
+  "draft_add": {
+    "name": "新增草稿",
+    "method": "POST",
+    "path": "/cgi-bin/draft/add",
+    "category": "草稿管理",
+    "params": [
+      "articles"
+    ],
+    "destructive": false
+  },
+  "draft_delete": {
+    "name": "删除草稿",
+    "method": "POST",
+    "path": "/cgi-bin/draft/delete",
+    "category": "草稿管理",
+    "params": [
+      "media_id"
+    ],
+    "destructive": true
+  },
+  "stable_token": {
+    "name": "获取稳定版接口调用凭据",
+    "method": "POST",
+    "path": "/cgi-bin/stable_token",
+    "category": "基础接口",
+    "params": [
+      "grant_type",
+      "appid",
+      "secret",
+      "force_refresh"
+    ],
+    "destructive": false,
+    "auth": "none"
+  },
+  "token_get": {
+    "name": "获取接口调用凭据",
+    "method": "GET",
+    "path": "/cgi-bin/token",
+    "category": "基础接口",
+    "params": [
+      "grant_type",
+      "appid",
+      "secret"
+    ],
+    "destructive": false,
+    "auth": "none"
+  },
+  "callback_check": {
+    "name": "网络通信检测",
+    "method": "POST",
+    "path": "/cgi-bin/callback/check",
+    "category": "基础接口",
+    "params": [],
+    "destructive": false
+  },
+  "get_api_domain_ip": {
+    "name": "获取微信API服务器IP",
+    "method": "GET",
+    "path": "/cgi-bin/get_api_domain_ip",
+    "category": "基础接口",
+    "params": [],
+    "destructive": false
+  },
+  "getcallbackip": {
+    "name": "获取微信推送服务器IP",
+    "method": "GET",
+    "path": "/cgi-bin/getcallbackip",
+    "category": "基础接口",
+    "params": [],
+    "destructive": false
+  },
+  "quota_clear_all": {
+    "name": "重置API调用次数",
+    "method": "POST",
+    "path": "/cgi-bin/clear_quota",
+    "category": "openApi管理",
+    "params": [],
+    "destructive": true
+  },
+  "quota_get": {
+    "name": "查询API调用额度",
+    "method": "POST",
+    "path": "/cgi-bin/openapi/quota/get",
+    "category": "openApi管理",
+    "params": [
+      "cgi_path"
+    ],
+    "destructive": false
+  },
+  "rid_get": {
+    "name": "查询rid信息",
+    "method": "POST",
+    "path": "/cgi-bin/openapi/rid/get",
+    "category": "openApi管理",
+    "params": [
+      "rid"
+    ],
+    "destructive": false
+  },
+  "quota_clear_all_v2": {
+    "name": "用AppSecret重置API调用次数",
+    "method": "POST",
+    "path": "/cgi-bin/clear_quota/v2",
+    "category": "openApi管理",
+    "params": [
+      "appid",
+      "appsecret"
+    ],
+    "destructive": true
+  },
+  "quota_clear": {
+    "name": "重置指定API调用次数",
+    "method": "POST",
+    "path": "/cgi-bin/openapi/quota/clear",
+    "category": "openApi管理",
+    "params": [
+      "cgi_path",
+      "appids"
+    ],
+    "destructive": true
+  },
+  "menu_create": {
+    "name": "创建自定义菜单",
+    "method": "POST",
+    "path": "/cgi-bin/menu/create",
+    "category": "自定义菜单",
+    "params": [
+      "button"
+    ],
+    "destructive": true
+  },
+  "selfmenu_info": {
+    "name": "查询自定义菜单信息",
+    "method": "GET",
+    "path": "/cgi-bin/get_current_selfmenu_info",
+    "category": "自定义菜单",
+    "params": [],
+    "destructive": false
+  },
+  "menu_get": {
+    "name": "获取自定义菜单配置",
+    "method": "GET",
+    "path": "/cgi-bin/menu/get",
+    "category": "自定义菜单",
+    "params": [],
+    "destructive": false
+  },
+  "menu_delete": {
+    "name": "删除自定义菜单",
+    "method": "POST",
+    "path": "/cgi-bin/menu/delete",
+    "category": "自定义菜单",
+    "params": [],
+    "destructive": true
+  },
+  "menu_addconditional": {
+    "name": "创建个性化菜单",
+    "method": "POST",
+    "path": "/cgi-bin/menu/addconditional",
+    "category": "自定义菜单",
+    "params": [
+      "button",
+      "matchrule"
+    ],
+    "destructive": true
+  },
+  "menu_delconditional": {
+    "name": "删除个性化菜单",
+    "method": "POST",
+    "path": "/cgi-bin/menu/delconditional",
+    "category": "自定义菜单",
+    "params": [
+      "menuid"
+    ],
+    "destructive": true
+  },
+  "menu_trymatch": {
+    "name": "测试个性化菜单匹配结果",
+    "method": "POST",
+    "path": "/cgi-bin/menu/trymatch",
+    "category": "自定义菜单",
+    "params": [
+      "user_id"
+    ],
+    "destructive": false
+  },
+  "autoreply_info": {
+    "name": "获取自动回复规则",
+    "method": "GET",
+    "path": "/cgi-bin/get_current_autoreply_info",
+    "category": "自动回复",
+    "params": [],
+    "destructive": false
+  },
+  "ticket_get": {
+    "name": "获取sdk临时票据",
+    "method": "GET",
+    "path": "/cgi-bin/ticket/getticket",
+    "category": "网页开发",
+    "params": [
+      "type"
+    ],
+    "destructive": false
+  },
+  "subscribe_send": {
+    "name": "发送一次性订阅消息",
+    "method": "POST",
+    "path": "/cgi-bin/message/template/subscribe",
+    "category": "一次性订阅消息",
+    "params": [
+      "touser",
+      "template_id",
+      "page",
+      "data"
+    ],
+    "destructive": false
+  },
+  "changeopenid": {
+    "name": "转换openid",
+    "method": "POST",
+    "path": "/cgi-bin/changeopenid",
+    "category": "用户管理",
+    "params": [
+      "openid",
+      "destination_appid"
+    ],
+    "destructive": false
+  },
+  "material_add": {
+    "name": "上传永久素材",
+    "method": "POST",
+    "path": "/cgi-bin/material/add_material",
+    "category": "素材管理",
+    "params": [
+      "type"
+    ],
+    "destructive": false,
+    "notes": "multipart 上传, 用 --file"
+  },
+  "material_get": {
+    "name": "获取永久素材",
+    "method": "POST",
+    "path": "/cgi-bin/material/get_material",
+    "category": "素材管理",
+    "params": [
+      "media_id"
+    ],
+    "destructive": false
+  },
+  "material_count": {
+    "name": "获取永久素材总数",
+    "method": "GET",
+    "path": "/cgi-bin/material/get_materialcount",
+    "category": "素材管理",
+    "params": [],
+    "destructive": false
+  },
+  "material_batchget": {
+    "name": "获取永久素材列表",
+    "method": "POST",
+    "path": "/cgi-bin/material/batchget_material",
+    "category": "素材管理",
+    "params": [
+      "type",
+      "offset",
+      "count"
+    ],
+    "destructive": false
+  },
+  "material_del": {
+    "name": "删除永久素材",
+    "method": "POST",
+    "path": "/cgi-bin/material/del_material",
+    "category": "素材管理",
+    "params": [
+      "media_id"
+    ],
+    "destructive": true
+  },
+  "media_uploadimg": {
+    "name": "上传发表内容中的图片",
+    "method": "POST",
+    "path": "/cgi-bin/media/uploadimg",
+    "category": "素材管理",
+    "params": [],
+    "destructive": false,
+    "notes": "multipart 上传, 用 --file"
+  },
+  "media_upload": {
+    "name": "新增临时素材",
+    "method": "POST",
+    "path": "/cgi-bin/media/upload",
+    "category": "素材管理",
+    "params": [
+      "type"
+    ],
+    "destructive": false,
+    "notes": "multipart 上传, 用 --file"
+  },
+  "media_get": {
+    "name": "获取临时素材",
+    "method": "GET",
+    "path": "/cgi-bin/media/get",
+    "category": "素材管理",
+    "params": [
+      "media_id"
+    ],
+    "destructive": false
+  },
+  "media_get_jssdk": {
+    "name": "获取高清语音素材",
+    "method": "GET",
+    "path": "/cgi-bin/media/get/jssdk",
+    "category": "素材管理",
+    "params": [
+      "media_id"
+    ],
+    "destructive": false
+  },
+  "draft_switch": {
+    "name": "草稿箱开关设置",
+    "method": "POST",
+    "path": "/cgi-bin/draft/switch",
+    "category": "草稿管理",
+    "params": [
+      "value"
+    ],
+    "destructive": true
+  },
+  "draft_get": {
+    "name": "获取草稿详情",
+    "method": "POST",
+    "path": "/cgi-bin/draft/get",
+    "category": "草稿管理",
+    "params": [
+      "media_id"
+    ],
+    "destructive": false
+  },
+  "draft_update": {
+    "name": "更新草稿",
+    "method": "POST",
+    "path": "/cgi-bin/draft/update",
+    "category": "草稿管理",
+    "params": [
+      "media_id",
+      "index",
+      "articles"
+    ],
+    "destructive": false
+  },
+  "draft_batchget": {
+    "name": "获取草稿列表",
+    "method": "POST",
+    "path": "/cgi-bin/draft/batchget",
+    "category": "草稿管理",
+    "params": [
+      "offset",
+      "count",
+      "no_content"
+    ],
+    "destructive": false
+  },
+  "product_card_info": {
+    "name": "获取商品卡片的DOM结构",
+    "method": "POST",
+    "path": "/channels/ec/service/product/getcardinfo",
+    "category": "商品卡片",
+    "params": [
+      "product_key"
+    ],
+    "destructive": false
+  },
+  "comment_open": {
+    "name": "打开已群发文章评论",
+    "method": "POST",
+    "path": "/cgi-bin/comment/open",
+    "category": "留言管理",
+    "params": [
+      "msg_data_id",
+      "index"
+    ],
+    "destructive": false
+  },
+  "comment_close": {
+    "name": "关闭已群发文章评论",
+    "method": "POST",
+    "path": "/cgi-bin/comment/close",
+    "category": "留言管理",
+    "params": [
+      "msg_data_id",
+      "index"
+    ],
+    "destructive": false
+  },
+  "comment_list": {
+    "name": "查看指定文章的评论数据",
+    "method": "POST",
+    "path": "/cgi-bin/comment/list",
+    "category": "留言管理",
+    "params": [
+      "msg_data_id",
+      "index",
+      "begin",
+      "count",
+      "type"
+    ],
+    "destructive": false
+  },
+  "comment_markelect": {
+    "name": "评论标记精选",
+    "method": "POST",
+    "path": "/cgi-bin/comment/markelect",
+    "category": "留言管理",
+    "params": [
+      "msg_data_id",
+      "index",
+      "user_comment_id"
+    ],
+    "destructive": true
+  },
+  "comment_unmarkelect": {
+    "name": "评论取消精选",
+    "method": "POST",
+    "path": "/cgi-bin/comment/unmarkelect",
+    "category": "留言管理",
+    "params": [
+      "msg_data_id",
+      "index",
+      "user_comment_id"
+    ],
+    "destructive": true
+  },
+  "comment_delete": {
+    "name": "删除评论",
+    "method": "POST",
+    "path": "/cgi-bin/comment/delete",
+    "category": "留言管理",
+    "params": [
+      "msg_data_id",
+      "index",
+      "user_comment_id"
+    ],
+    "destructive": true
+  },
+  "comment_reply_add": {
+    "name": "回复评论",
+    "method": "POST",
+    "path": "/cgi-bin/comment/reply/add",
+    "category": "留言管理",
+    "params": [
+      "msg_data_id",
+      "index",
+      "user_comment_id",
+      "content"
+    ],
+    "destructive": false
+  },
+  "comment_reply_delete": {
+    "name": "删除回复",
+    "method": "POST",
+    "path": "/cgi-bin/comment/reply/delete",
+    "category": "留言管理",
+    "params": [
+      "msg_data_id",
+      "index",
+      "user_comment_id"
+    ],
+    "destructive": true
+  },
+  "freepublish_submit": {
+    "name": "发布草稿",
+    "method": "POST",
+    "path": "/cgi-bin/freepublish/submit",
+    "category": "发布能力",
+    "params": [
+      "media_id"
+    ],
+    "destructive": true,
+    "notes": "发布后对全部粉丝可见"
+  },
+  "freepublish_get": {
+    "name": "发布状态查询",
+    "method": "POST",
+    "path": "/cgi-bin/freepublish/get",
+    "category": "发布能力",
+    "params": [
+      "publish_id"
+    ],
+    "destructive": false
+  },
+  "freepublish_delete": {
+    "name": "删除发布文章",
+    "method": "POST",
+    "path": "/cgi-bin/freepublish/delete",
+    "category": "发布能力",
+    "params": [
+      "article_id",
+      "index"
+    ],
+    "destructive": true
+  },
+  "freepublish_batchget": {
+    "name": "获取已发布的消息列表",
+    "method": "POST",
+    "path": "/cgi-bin/freepublish/batchget",
+    "category": "发布能力",
+    "params": [
+      "offset",
+      "count",
+      "no_content"
+    ],
+    "destructive": false
+  },
+  "freepublish_getarticle": {
+    "name": "获取已发布图文信息",
+    "method": "POST",
+    "path": "/cgi-bin/freepublish/getarticle",
+    "category": "发布能力",
+    "params": [
+      "article_id"
+    ],
+    "destructive": false
+  },
+  "tags_get": {
+    "name": "获取标签",
+    "method": "GET",
+    "path": "/cgi-bin/tags/get",
+    "category": "标签管理",
+    "params": [],
+    "destructive": false
+  },
+  "tags_create": {
+    "name": "创建标签",
+    "method": "POST",
+    "path": "/cgi-bin/tags/create",
+    "category": "标签管理",
+    "params": [
+      "tag"
+    ],
+    "destructive": false
+  },
+  "tags_update": {
+    "name": "编辑标签",
+    "method": "POST",
+    "path": "/cgi-bin/tags/update",
+    "category": "标签管理",
+    "params": [
+      "tag"
+    ],
+    "destructive": false
+  },
+  "tags_delete": {
+    "name": "删除标签",
+    "method": "POST",
+    "path": "/cgi-bin/tags/delete",
+    "category": "标签管理",
+    "params": [
+      "tag"
+    ],
+    "destructive": true
+  },
+  "user_tag_get": {
+    "name": "获取标签下粉丝列表",
+    "method": "POST",
+    "path": "/cgi-bin/user/tag/get",
+    "category": "标签管理",
+    "params": [
+      "tagid",
+      "next_openid"
+    ],
+    "destructive": false
+  },
+  "batchtagging": {
+    "name": "批量为用户打标签",
+    "method": "POST",
+    "path": "/cgi-bin/tags/members/batchtagging",
+    "category": "标签管理",
+    "params": [
+      "openid_list",
+      "tagid"
+    ],
+    "destructive": false
+  },
+  "batchuntagging": {
+    "name": "批量为用户取消标签",
+    "method": "POST",
+    "path": "/cgi-bin/tags/members/batchuntagging",
+    "category": "标签管理",
+    "params": [
+      "openid_list",
+      "tagid"
+    ],
+    "destructive": false
+  },
+  "tag_getidlist": {
+    "name": "获取用户的标签列表",
+    "method": "POST",
+    "path": "/cgi-bin/tags/getidlist",
+    "category": "标签管理",
+    "params": [
+      "openid"
+    ],
+    "destructive": false
+  },
+  "user_info": {
+    "name": "获取用户基本信息",
+    "method": "GET",
+    "path": "/cgi-bin/user/info",
+    "category": "用户信息",
+    "params": [
+      "openid",
+      "lang"
+    ],
+    "destructive": false
+  },
+  "user_info_batchget": {
+    "name": "批量获取用户基本信息",
+    "method": "POST",
+    "path": "/cgi-bin/user/info/batchget",
+    "category": "用户信息",
+    "params": [
+      "user_list"
+    ],
+    "destructive": false
+  },
+  "user_get": {
+    "name": "获取关注用户列表",
+    "method": "GET",
+    "path": "/cgi-bin/user/get",
+    "category": "用户信息",
+    "params": [
+      "next_openid"
+    ],
+    "destructive": false
+  },
+  "blacklist_get": {
+    "name": "获取公众号的黑名单列表",
+    "method": "POST",
+    "path": "/cgi-bin/tags/members/getblacklist",
+    "category": "用户信息",
+    "params": [
+      "begin_openid"
+    ],
+    "destructive": false
+  },
+  "blacklist_batch": {
+    "name": "拉黑用户",
+    "method": "POST",
+    "path": "/cgi-bin/tags/members/batchblacklist",
+    "category": "用户信息",
+    "params": [
+      "openid_list"
+    ],
+    "destructive": true
+  },
+  "blacklist_batchun": {
+    "name": "取消拉黑用户",
+    "method": "POST",
+    "path": "/cgi-bin/tags/members/batchunblacklist",
+    "category": "用户信息",
+    "params": [
+      "openid_list"
+    ],
+    "destructive": false
+  },
+  "user_remark": {
+    "name": "设置用户备注名",
+    "method": "POST",
+    "path": "/cgi-bin/user/info/updateremark",
+    "category": "用户信息",
+    "params": [
+      "openid",
+      "remark"
+    ],
+    "destructive": false
+  },
+  "kflist": {
+    "name": "获取所有客服账号",
+    "method": "GET",
+    "path": "/cgi-bin/customservice/getkflist",
+    "category": "客服管理",
+    "params": [],
+    "destructive": false
+  },
+  "kfonlinelist": {
+    "name": "获取在线客服列表",
+    "method": "GET",
+    "path": "/cgi-bin/customservice/getonlinekflist",
+    "category": "客服管理",
+    "params": [],
+    "destructive": false
+  },
+  "kfaccount_add": {
+    "name": "添加客服账号",
+    "method": "POST",
+    "path": "/customservice/kfaccount/add",
+    "category": "客服管理",
+    "params": [
+      "kf_account",
+      "nickname"
+    ],
+    "destructive": false
+  },
+  "kfaccount_update": {
+    "name": "修改客服账号",
+    "method": "POST",
+    "path": "/customservice/kfaccount/update",
+    "category": "客服管理",
+    "params": [
+      "kf_account",
+      "nickname"
+    ],
+    "destructive": false
+  },
+  "kfaccount_del": {
+    "name": "删除客服账号",
+    "method": "POST",
+    "path": "/customservice/kfaccount/del",
+    "category": "客服管理",
+    "params": [
+      "kf_account"
+    ],
+    "destructive": true
+  },
+  "kfaccount_invite": {
+    "name": "邀请绑定客服账号",
+    "method": "POST",
+    "path": "/customservice/kfaccount/inviteworker",
+    "category": "客服管理",
+    "params": [
+      "kf_account",
+      "invite_wx"
+    ],
+    "destructive": false
+  },
+  "kf_uploadheadimg": {
+    "name": "设置客服头像",
+    "method": "POST",
+    "path": "/customservice/kfaccount/uploadheadimg",
+    "category": "客服管理",
+    "params": [],
+    "destructive": false,
+    "notes": "multipart 上传, 用 --file"
+  },
+  "kfsession_create": {
+    "name": "创建会话",
+    "method": "POST",
+    "path": "/customservice/kfsession/create",
+    "category": "会话控制",
+    "params": [
+      "kf_account",
+      "openid"
+    ],
+    "destructive": false
+  },
+  "kfsession_close": {
+    "name": "关闭会话",
+    "method": "POST",
+    "path": "/customservice/kfsession/close",
+    "category": "会话控制",
+    "params": [
+      "kf_account",
+      "openid"
+    ],
+    "destructive": false
+  },
+  "kfsession_get": {
+    "name": "获取客户会话状态",
+    "method": "GET",
+    "path": "/customservice/kfsession/getsession",
+    "category": "会话控制",
+    "params": [
+      "openid"
+    ],
+    "destructive": false
+  },
+  "kfsession_list": {
+    "name": "获取客服会话列表",
+    "method": "GET",
+    "path": "/customservice/kfsession/getsessionlist",
+    "category": "会话控制",
+    "params": [
+      "kf_account"
+    ],
+    "destructive": false
+  },
+  "kfsession_waitcase": {
+    "name": "获取未接入会话列表",
+    "method": "GET",
+    "path": "/customservice/kfsession/getwaitcase",
+    "category": "会话控制",
+    "params": [],
+    "destructive": false
+  },
+  "kf_msg_send": {
+    "name": "发送客服消息",
+    "method": "POST",
+    "path": "/cgi-bin/message/custom/send",
+    "category": "客服消息",
+    "params": [
+      "touser",
+      "msgtype",
+      "content"
+    ],
+    "destructive": false
+  },
+  "kf_typing": {
+    "name": "客服输入状态",
+    "method": "POST",
+    "path": "/cgi-bin/message/custom/typing",
+    "category": "客服消息",
+    "params": [
+      "touser",
+      "command"
+    ],
+    "destructive": false
+  },
+  "msg_record": {
+    "name": "获取聊天记录",
+    "method": "POST",
+    "path": "/customservice/msgrecord/getmsglist",
+    "category": "客服消息",
+    "params": [
+      "starttime",
+      "endtime",
+      "msgid",
+      "number"
+    ],
+    "destructive": false
+  },
+  "mass_sendall": {
+    "name": "根据标签群发消息",
+    "method": "POST",
+    "path": "/cgi-bin/message/mass/sendall",
+    "category": "群发消息",
+    "params": [
+      "filter",
+      "msgtype"
+    ],
+    "destructive": true
+  },
+  "mass_delete": {
+    "name": "删除群发消息",
+    "method": "POST",
+    "path": "/cgi-bin/message/mass/delete",
+    "category": "群发消息",
+    "params": [
+      "msg_id",
+      "article_idx"
+    ],
+    "destructive": true
+  },
+  "mass_preview": {
+    "name": "预览消息",
+    "method": "POST",
+    "path": "/cgi-bin/message/mass/preview",
+    "category": "群发消息",
+    "params": [
+      "touser",
+      "msgtype"
+    ],
+    "destructive": false
+  },
+  "mass_get": {
+    "name": "查询群发消息发送状态",
+    "method": "POST",
+    "path": "/cgi-bin/message/mass/get",
+    "category": "群发消息",
+    "params": [
+      "msg_id"
+    ],
+    "destructive": false
+  },
+  "mass_speed_get": {
+    "name": "获取群发速度",
+    "method": "POST",
+    "path": "/cgi-bin/message/mass/speed/get",
+    "category": "群发消息",
+    "params": [],
+    "destructive": false
+  },
+  "mass_speed_set": {
+    "name": "设置群发速度",
+    "method": "POST",
+    "path": "/cgi-bin/message/mass/speed/set",
+    "category": "群发消息",
+    "params": [
+      "speed"
+    ],
+    "destructive": false
+  },
+  "uploadnews": {
+    "name": "上传图文消息素材(旧)",
+    "method": "POST",
+    "path": "/cgi-bin/media/uploadnews",
+    "category": "群发消息",
+    "params": [
+      "articles"
+    ],
+    "destructive": false
+  },
+  "getusersummary": {
+    "name": "获取用户增减数据",
+    "method": "POST",
+    "path": "/datacube/getusersummary",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 7 天"
+  },
+  "getusercumulate": {
+    "name": "获取累计用户数据",
+    "method": "POST",
+    "path": "/datacube/getusercumulate",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 7 天"
+  },
+  "getarticlesummary": {
+    "name": "获取图文群发每日数据",
+    "method": "POST",
+    "path": "/datacube/getarticlesummary",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 1 天"
+  },
+  "getarticletotal": {
+    "name": "获取图文群发总数据",
+    "method": "POST",
+    "path": "/datacube/getarticletotal",
+    "category": "数据统计",
+    "params": [
+      "begin_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 1 天"
+  },
+  "getuserread": {
+    "name": "获取图文统计数据",
+    "method": "POST",
+    "path": "/datacube/getuserread",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 3 天"
+  },
+  "getuserreadhour": {
+    "name": "获取图文统计分时数据",
+    "method": "POST",
+    "path": "/datacube/getuserreadhour",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 1 天"
+  },
+  "getusershare": {
+    "name": "获取图文分享转发数据",
+    "method": "POST",
+    "path": "/datacube/getusershare",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 7 天"
+  },
+  "getusersharehour": {
+    "name": "获取图文分享转发分时数据",
+    "method": "POST",
+    "path": "/datacube/getusersharehour",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 1 天"
+  },
+  "getupstreammsg": {
+    "name": "获取消息发送概况数据",
+    "method": "POST",
+    "path": "/datacube/getupstreammsg",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 7 天"
+  },
+  "getupstreammsghour": {
+    "name": "获取消息发送分时数据",
+    "method": "POST",
+    "path": "/datacube/getupstreammsghour",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 1 天"
+  },
+  "getupstreammsgweek": {
+    "name": "获取消息发送周数据",
+    "method": "POST",
+    "path": "/datacube/getupstreammsgweek",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 必须为自然周"
+  },
+  "getupstreammsgmonth": {
+    "name": "获取消息发送月数据",
+    "method": "POST",
+    "path": "/datacube/getupstreammsgmonth",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 必须为自然月"
+  },
+  "getupstreammsgdist": {
+    "name": "获取消息发送分布数据",
+    "method": "POST",
+    "path": "/datacube/getupstreammsgdist",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 15 天"
+  },
+  "getupstreammsgdistweek": {
+    "name": "获取消息发送分布周数据",
+    "method": "POST",
+    "path": "/datacube/getupstreammsgdistweek",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 必须为自然周"
+  },
+  "getupstreammsgdistmonth": {
+    "name": "获取消息发送分布月数据",
+    "method": "POST",
+    "path": "/datacube/getupstreammsgdistmonth",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 必须为自然月"
+  },
+  "getarticleread": {
+    "name": "获取图文阅读数据",
+    "method": "POST",
+    "path": "/datacube/getarticleread",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询"
+  },
+  "getarticleshare": {
+    "name": "获取图文分享数据",
+    "method": "POST",
+    "path": "/datacube/getarticleshare",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询"
+  },
+  "getbizsummary": {
+    "name": "获取公众号概况数据",
+    "method": "POST",
+    "path": "/datacube/getbizsummary",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询"
+  },
+  "getarticletotaldetail": {
+    "name": "获取图文群发总数据明细",
+    "method": "POST",
+    "path": "/datacube/getarticletotaldetail",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询"
+  },
+  "getinterfacesummary": {
+    "name": "获取接口分析数据",
+    "method": "POST",
+    "path": "/datacube/getinterfacesummary",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 30 天"
+  },
+  "getinterfacesummaryhour": {
+    "name": "获取接口分析分时数据",
+    "method": "POST",
+    "path": "/datacube/getinterfacesummaryhour",
+    "category": "数据统计",
+    "params": [
+      "begin_date",
+      "end_date"
+    ],
+    "destructive": false,
+    "notes": "按 begin_date/end_date 日期区间查询, 最大跨度 1 天"
+  },
+  "voice_translate": {
+    "name": "提交语音翻译内容",
+    "method": "POST",
+    "path": "/cgi-bin/media/voice/translatecontent",
+    "category": "智能接口",
+    "params": [
+      "voice_id",
+      "lfrom",
+      "lto"
+    ],
+    "destructive": false
+  },
+  "voice_add": {
+    "name": "提交语音内容进语音识别",
+    "method": "POST",
+    "path": "/cgi-bin/media/voice/addvoicetorecofortext",
+    "category": "智能接口",
+    "params": [
+      "format",
+      "voice_id",
+      "lang"
+    ],
+    "destructive": false
+  },
+  "voice_query": {
+    "name": "获取语音识别结果",
+    "method": "POST",
+    "path": "/cgi-bin/media/voice/queryrecoresultfortext",
+    "category": "智能接口",
+    "params": [
+      "voice_id"
+    ],
+    "destructive": false
+  },
+  "ocr_menu": {
+    "name": "OCR菜单识别",
+    "method": "POST",
+    "path": "/cv/ocr/menu",
+    "category": "智能接口",
+    "params": [
+      "img_url"
+    ],
+    "destructive": false
+  },
+  "ocr_comm": {
+    "name": "OCR通用印刷体识别",
+    "method": "POST",
+    "path": "/cv/ocr/comm",
+    "category": "智能接口",
+    "params": [
+      "img_url"
+    ],
+    "destructive": false
+  },
+  "ocr_driving": {
+    "name": "OCR行驶证识别",
+    "method": "POST",
+    "path": "/cv/ocr/driving",
+    "category": "智能接口",
+    "params": [
+      "img_url"
+    ],
+    "destructive": false
+  },
+  "ocr_bankcard": {
+    "name": "OCR银行卡识别",
+    "method": "POST",
+    "path": "/cv/ocr/bankcard",
+    "category": "智能接口",
+    "params": [
+      "img_url"
+    ],
+    "destructive": false
+  },
+  "ocr_bizlicense": {
+    "name": "OCR营业执照识别",
+    "method": "POST",
+    "path": "/cv/ocr/bizlicense",
+    "category": "智能接口",
+    "params": [
+      "img_url"
+    ],
+    "destructive": false
+  },
+  "ocr_drivinglicense": {
+    "name": "OCR驾驶证识别",
+    "method": "POST",
+    "path": "/cv/ocr/drivinglicense",
+    "category": "智能接口",
+    "params": [
+      "img_url"
+    ],
+    "destructive": false
+  },
+  "ocr_idcard": {
+    "name": "OCR身份证识别",
+    "method": "POST",
+    "path": "/cv/ocr/idcard",
+    "category": "智能接口",
+    "params": [
+      "img_url"
+    ],
+    "destructive": false
+  },
+  "img_aicrop": {
+    "name": "图片智能裁剪",
+    "method": "POST",
+    "path": "/cv/img/aicrop",
+    "category": "智能接口",
+    "params": [
+      "img_url",
+      "ratios"
+    ],
+    "destructive": false
+  },
+  "img_qrcode": {
+    "name": "图片二维码识别",
+    "method": "POST",
+    "path": "/cv/img/qrcode",
+    "category": "智能接口",
+    "params": [
+      "img_url"
+    ],
+    "destructive": false
+  },
+  "store_category": {
+    "name": "获取门店类目表",
+    "method": "POST",
+    "path": "/wxa/get_merchant_category",
+    "category": "微信门店",
+    "params": [],
+    "destructive": false
+  },
+  "store_apply": {
+    "name": "申请开通门店功能",
+    "method": "POST",
+    "path": "/wxa/apply_merchant",
+    "category": "微信门店",
+    "params": [],
+    "destructive": false
+  },
+  "store_audit_info": {
+    "name": "查询门店功能审核信息",
+    "method": "POST",
+    "path": "/wxa/get_merchant_audit_info",
+    "category": "微信门店",
+    "params": [],
+    "destructive": false
+  },
+  "store_modify": {
+    "name": "修改门店基本信息",
+    "method": "POST",
+    "path": "/wxa/modify_merchant",
+    "category": "微信门店",
+    "params": [],
+    "destructive": false
+  },
+  "district_get": {
+    "name": "获取省市区信息",
+    "method": "POST",
+    "path": "/wxa/get_district",
+    "category": "微信门店",
+    "params": [],
+    "destructive": false
+  },
+  "map_poi_search": {
+    "name": "搜索地图POI",
+    "method": "POST",
+    "path": "/wxa/search_map_poi",
+    "category": "微信门店",
+    "params": [
+      "districtid",
+      "keyword"
+    ],
+    "destructive": false
+  },
+  "store_add": {
+    "name": "添加门店",
+    "method": "POST",
+    "path": "/wxa/add_store",
+    "category": "微信门店",
+    "params": [],
+    "destructive": false
+  },
+  "store_info": {
+    "name": "获取门店信息",
+    "method": "POST",
+    "path": "/wxa/get_store_info",
+    "category": "微信门店",
+    "params": [
+      "poi_id"
+    ],
+    "destructive": false
+  },
+  "store_list": {
+    "name": "获取门店列表",
+    "method": "POST",
+    "path": "/wxa/get_store_list",
+    "category": "微信门店",
+    "params": [
+      "offset",
+      "limit"
+    ],
+    "destructive": false
+  },
+  "store_del": {
+    "name": "删除门店",
+    "method": "POST",
+    "path": "/wxa/del_store",
+    "category": "微信门店",
+    "params": [
+      "poi_id"
+    ],
+    "destructive": true
+  },
+  "store_update": {
+    "name": "更新门店信息",
+    "method": "POST",
+    "path": "/wxa/update_store",
+    "category": "微信门店",
+    "params": [],
+    "destructive": false
+  },
+  "map_poi_create": {
+    "name": "在地图创建新的POI",
+    "method": "POST",
+    "path": "/wxa/create_map_poi",
+    "category": "微信门店",
+    "params": [],
+    "destructive": false
+  },
+  "cityservice_send": {
+    "name": "发送就医助手消息",
+    "method": "POST",
+    "path": "/cityservice/sendchannelmsg",
+    "category": "就医助手",
+    "params": [
+      "openid",
+      "channel"
+    ],
+    "destructive": false
+  }
+}
