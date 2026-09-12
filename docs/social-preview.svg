@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07C160"/>
+      <stop offset="1" stop-color="#04803C"/>
+    </linearGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07C160"/>
+      <stop offset="1" stop-color="#059A4A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <!-- faint bubble watermark -->
+  <path d="M1080 40c-70 0-126 46-126 104 0 33 19 63 49 82l-11 37c-2 7 5 12 11 9l43-24c11 2 22 4 34 4 70 0 126-46 126-104S1150 40 1080 40z"
+        fill="#ffffff" opacity="0.08"/>
+  <!-- logo tile -->
+  <g transform="translate(56,96) scale(0.78)">
+    <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#tile)" stroke="#ffffff" stroke-width="10"/>
+    <path d="M256 108c-84 0-152 56-152 126 0 40 23 76 59 99l-13 45c-2 8 6 14 13 10l52-29c13 3 27 5 41 5 84 0 152-56 152-130s-68-126-152-126z" fill="#ffffff"/>
+    <circle cx="212" cy="222" r="16" fill="#07C160"/>
+    <circle cx="300" cy="222" r="16" fill="#07C160"/>
+    <path d="M212 268l-30 26 30 26" fill="none" stroke="#07C160" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="228" y="306" width="66" height="14" rx="7" fill="#07C160"/>
+    <text x="256" y="452" font-family="Menlo, Consolas, monospace" font-size="64" font-weight="bold" fill="#ffffff" text-anchor="middle">{api}</text>
+  </g>
+  <!-- text block -->
+  <text x="540" y="212" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif"
+        font-size="68" font-weight="700" fill="#ffffff">微信公众号全量 API</text>
+  <text x="540" y="304" font-family="Menlo, Consolas, monospace"
+        font-size="54" font-weight="600" fill="#DFFFEF">wechat-mp-skill</text>
+  <text x="540" y="388" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif"
+        font-size="34" fill="#EAFFF3">134 端点 · 零依赖 Python · 破坏性操作防护</text>
+  <text x="540" y="448" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif"
+        font-size="34" fill="#EAFFF3">为 AI agent 而生 · built for AI agents</text>
+</svg>
