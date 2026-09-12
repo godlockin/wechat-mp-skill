@@ -490,3 +490,55 @@ class TestPublish(unittest.TestCase):
                 f.write(json.dumps({"articles": [{"title": "t", "content": "c"}]}))
             code = wechat_mp.main(["publish", art])
         self.assertEqual(code, 2)
+
+
+class TestParamChannels(unittest.TestCase):
+    """params 通道维度: string=body(默认), object={name, in: query|body, required}."""
+
+    def test_validate_rejects_bad_param_object(self):
+        bad = {"x": {"name": "n", "method": "GET", "path": "/x", "category": "c",
+                     "params": [{"name": "p", "in": "header"}], "destructive": False}}
+        errs = wechat_mp.validate_endpoints(bad)
+        self.assertTrue(any("in must be query/body" in e for e in errs))
+
+    def test_validate_accepts_object_params(self):
+        ok = {"x": {"name": "n", "method": "GET", "path": "/x", "category": "c",
+                    "params": [{"name": "p", "in": "query", "required": True}],
+                    "destructive": False}}
+        self.assertEqual(wechat_mp.validate_endpoints(ok), [])
+
+    def test_real_registry_validates(self):
+        self.assertEqual(wechat_mp.validate_endpoints(wechat_mp.load_endpoints()), [])
+
+    def test_query_channel_moved_from_body_to_url(self):
+        fx = FakeUrllibRequest([{"access_token": "T", "expires_in": 7200}, {"errcode": 0}])
+        with mock.patch("urllib.request.urlopen", fx), \
+             mock.patch.object(wechat_mp, "load_config", return_value=("id", "sec")), \
+             mock.patch.object(wechat_mp, "CONFIG_DIR", tempfile.mkdtemp()):
+            wechat_mp.TOKEN_FILE = os.path.join(wechat_mp.CONFIG_DIR, "token.json")
+            code = wechat_mp.main(["call", "quota_clear_all_v2", "--data",
+                                   '{"appid":"wx1","appsecret":"s1"}', "--yes"])
+        self.assertEqual(code, 0)
+        req = fx.requests[1]
+        self.assertIn("appid=wx1", req.full_url)
+        self.assertIn("appsecret=s1", req.full_url)
+        self.assertIn("access_token=T", req.full_url)
+        self.assertIsNone(req.data)  # query 型端点不发 body
+
+    def test_missing_required_param_blocked_locally(self):
+        import io, contextlib
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            code = wechat_mp.main(["call", "quota_clear_all", "--yes"])  # 缺 appids
+        self.assertEqual(code, 2)
+        self.assertIn("missing_params", buf.getvalue())
+        self.assertIn("appids", buf.getvalue())
+
+    def test_missing_required_query_param_blocked(self):
+        import io, contextlib
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            code = wechat_mp.main(["call", "quota_clear_all_v2", "--data",
+                                   '{"appid":"wx1"}', "--yes"])  # 缺 appsecret
+        self.assertEqual(code, 2)
+        self.assertIn("appsecret", buf.getvalue())

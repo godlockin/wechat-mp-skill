@@ -20,7 +20,9 @@ CLI 内部错误码(负数,本地产生,不发网络请求)与服务端常见 er
 | 40164 | 调用接口的 IP 不在白名单 | mp.weixin.qq.com → 设置与开发 → 基本配置 → IP 白名单,加入本机出口 IP |
 | 40243 | AppSecret 已被冻结 | 公众号后台基本配置 → 重置 AppSecret → 更新 `.env` |
 | 41004 | 缺少 secret 参数 | 凭证配置为空;同 -1,补全 env 或 `.env` |
-| 45009 | API 调用次数超限(达到日配额) | 清空配额:`python3 scripts/wechat_mp.py call quota_clear_all --yes`(每天限 1 次 clear_quota;或次日自动恢复) |
+| 45009 | API 调用次数超限(达到日配额) | 清空配额:`python3 scripts/wechat_mp.py call quota_clear_all --yes --data '{"appids":["wxXXXX"]}'`(每天限 1 次 clear_quota;或次日自动恢复) |
+| 44002 | post data 为空 | 端点需要 body 但没传;注册表 params 声明 required 后 `call` 会在本地拦截并提示 missing_params |
+| 41002 | appid 缺失 | 该端点只读 URL query string、不解析 JSON body(如 `clear_quota/v2`)— 用 `call` 时 CLI 自动把 in=query 参数移到 URL;用 `raw` 时需手动拼 query |
 | 48001 | api unauthorized(账号无该接口权限) | 非代码问题:未认证订阅号无 `freepublish` 发布、留言等权限;需微信认证或改用后台手动操作 |
 | 50004 | 用户已被拉黑 | 公众号后台 → 用户管理 → 移除黑名单 |
 | 50007 | 用户已关注公众号,无需重复操作 | 忽略或检查业务逻辑是否重复触发 |

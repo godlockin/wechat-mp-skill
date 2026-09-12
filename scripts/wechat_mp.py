@@ -233,11 +233,29 @@ def validate_endpoints(registry):
                 errs.append(f"{eid}: missing field {field}")
         if e.get("auth", "token") not in ("token", "none"):
             errs.append(f"{eid}: auth must be token/none")
+        for p in e.get("params", []):
+            if isinstance(p, dict):
+                if not p.get("name"):
+                    errs.append(f"{eid}: param object missing name")
+                if p.get("in", "body") not in ("query", "body"):
+                    errs.append(f"{eid}: param in must be query/body")
         key = (e.get("method"), e.get("path"))
         if key in seen_paths:
             errs.append(f"{eid}: duplicate method+path with {seen_paths[key]}")
         seen_paths[key] = eid
     return errs
+
+
+def normalize_params(ep):
+    """params 双形态归一: "name" → body/非必填; {"name","in","required"} 原样。"""
+    out = []
+    for p in ep.get("params", []):
+        if isinstance(p, str):
+            out.append({"name": p, "in": "body", "required": False})
+        else:
+            out.append({"name": p.get("name"), "in": p.get("in", "body"),
+                        "required": bool(p.get("required", False))})
+    return out
 
 
 def cmd_list(args):
@@ -265,8 +283,24 @@ def cmd_call(args):
                           "hint": "destructive operation, add --yes to confirm"},
                          ensure_ascii=False, indent=2))
         return 2
+    body = _load_data_arg(args.data) or {}
+    query_from_body = {}
+    for p in normalize_params(ep):
+        if p["in"] == "query" and p["name"] in body:
+            query_from_body[p["name"]] = body.pop(p["name"])
+    missing = [f'{p["name"]}(in={p["in"]})' for p in normalize_params(ep)
+               if p["required"] and p["name"] not in body
+               and p["name"] not in query_from_body]
+    if missing:
+        print(json.dumps({"blocked": True, "endpoint": args.endpoint,
+                          "missing_params": missing,
+                          "hint": 'pass required params via --data JSON; '
+                                  'query-channel params are auto-moved to the URL query'},
+                         ensure_ascii=False, indent=2))
+        return 2
     try:
-        payload = api_call(ep["method"], ep["path"], body=_load_data_arg(args.data),
+        payload = api_call(ep["method"], ep["path"], body=body or None,
+                           extra_query=query_from_body or None,
                            file=_read_file(args.file) if args.file else None)
     except WechatNetworkError as e:
         _emit({"errcode": -2, "errmsg": f"network error: {e}", "rid": None})

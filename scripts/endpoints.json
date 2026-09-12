@@ -83,7 +83,10 @@
     "method": "POST",
     "path": "/cgi-bin/clear_quota",
     "category": "openApi管理",
-    "params": [],
+    "params": [
+      {"name": "appids", "in": "body", "required": true}
+    ],
+    "notes": "body: {\"appids\": [\"wxXXXX\"]} (数组,可多个)",
     "destructive": true
   },
   "quota_get": {
@@ -112,9 +115,10 @@
     "path": "/cgi-bin/clear_quota/v2",
     "category": "openApi管理",
     "params": [
-      "appid",
-      "appsecret"
+      {"name": "appid", "in": "query", "required": true},
+      {"name": "appsecret", "in": "query", "required": true}
     ],
+    "notes": "该端点只读 URL query string,不解析 JSON body;--data 里的 query 参数会被 CLI 自动移到 URL",
     "destructive": true
   },
   "quota_clear": {
