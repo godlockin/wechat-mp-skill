@@ -6,6 +6,41 @@ import uuid
 CONFIG_DIR = ".wechat-mp"
 
 
+def cmd_init(args):
+    """引导式写入 .wechat-mp/.env (env 变量优先级不变,init 只是生成文件的便利层)。"""
+    env_path = os.path.join(CONFIG_DIR, ".env")
+    if os.environ.get("WECHAT_APP_ID") and os.environ.get("WECHAT_APP_SECRET"):
+        print("[SKIP] 环境变量已提供凭证 (WECHAT_APP_ID/WECHAT_APP_SECRET),无需 .env")
+        return 0
+    existing = {}
+    if os.path.isfile(env_path):
+        with open(env_path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    existing[k.strip()] = v.strip()
+        print(f"已有 {env_path},键: "
+              + ", ".join(sorted(k for k in existing if k.startswith("WECHAT"))))
+        if input("覆盖重配? [y/N] ").strip().lower() != "y":
+            print("保持现有配置")
+            return 0
+    print("AppID/AppSecret 获取: mp.weixin.qq.com → 设置与开发 → 基本配置")
+    new_id = (input(f"AppID [{existing.get('WECHAT_APP_ID', '')}]: ").strip()
+              or existing.get("WECHAT_APP_ID", ""))
+    new_sec = (getpass.getpass("AppSecret (输入不回显): ").strip()
+               or existing.get("WECHAT_APP_SECRET", ""))
+    if not new_id or not new_sec:
+        print("AppID/AppSecret 均必填,未写入", file=sys.stderr)
+        return 2
+    os.makedirs(CONFIG_DIR, exist_ok=True)
+    with open(env_path, "w", encoding="utf-8") as f:
+        f.write(f"WECHAT_APP_ID={new_id}\nWECHAT_APP_SECRET={new_sec}\n")
+    os.chmod(env_path, 0o600)
+    print(f"✓ 已写入 {env_path} (chmod 600);运行 doctor 验证")
+    return 0
+
+
 def load_config():
     """返回 (app_id, secret)。env 优先,回退 .wechat-mp/.env。"""
     app_id = os.environ.get("WECHAT_APP_ID")
@@ -75,7 +110,7 @@ def http_json(method, path, query=None, body=None):
     url = API_BASE + path
     if query:
         url += "?" + urllib.parse.urlencode(query)
-    data = json.dumps(body).encode() if body is not None else None
+    data = json.dumps(body, ensure_ascii=False).encode("utf-8") if body is not None else None
     req = urllib.request.Request(url, data=data, method=method)
     if data is not None:
         req.add_header("Content-Type", "application/json")
@@ -169,7 +204,7 @@ def api_call(method, path, body=None, file=None, file_field="media",
         return payload
 
 
-import argparse, sys
+import argparse, getpass, sys
 
 
 def _emit(payload):
@@ -333,7 +368,7 @@ def cmd_doctor(args):
     steps = []
     app_id, secret = load_config()
     steps.append(("credentials", app_id and secret,
-                  "set WECHAT_APP_ID/WECHAT_APP_SECRET or .wechat-mp/.env"))
+                  "set WECHAT_APP_ID/WECHAT_APP_SECRET or .wechat-mp/.env, or run 'init'"))
     if not (app_id and secret):
         return _report_doctor(steps)
     try:
@@ -546,6 +581,8 @@ def cmd_publish(args):
 def build_parser():
     p = argparse.ArgumentParser(prog="wechat_mp.py", description="微信公众号全量 API CLI")
     sub = p.add_subparsers(dest="command", required=True)
+    ini = sub.add_parser("init", help="引导式配置 AppID/AppSecret 到 .wechat-mp/.env")
+    ini.set_defaults(func=cmd_init)
     raw = sub.add_parser("raw", help="通用网关: 任意端点直达")
     raw.add_argument("method", choices=["GET", "POST"])
     raw.add_argument("path", help="API 路径,可带 ?query")

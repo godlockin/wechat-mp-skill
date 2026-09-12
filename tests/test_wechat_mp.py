@@ -542,3 +542,61 @@ class TestParamChannels(unittest.TestCase):
                                    '{"appid":"wx1"}', "--yes"])  # 缺 appsecret
         self.assertEqual(code, 2)
         self.assertIn("appsecret", buf.getvalue())
+
+
+class TestUtf8Body(unittest.TestCase):
+    def test_http_json_sends_raw_utf8_not_escaped(self):
+        fx = FakeUrllibRequest([{"errcode": 0}])
+        with mock.patch("urllib.request.urlopen", fx):
+            wechat_mp.http_json("POST", "/cgi-bin/draft/add", body={"title": "验收测试"})
+        data = fx.requests[0].data
+        self.assertIn("验收测试".encode("utf-8"), data)
+        self.assertNotIn(b"\\u9a8c", data)  # 微信不解码 \uXXXX,会原样入库
+
+
+class TestInit(unittest.TestCase):
+    def test_init_writes_env_600(self):
+        with tempfile.TemporaryDirectory() as d, \
+             mock.patch.object(wechat_mp, "CONFIG_DIR", d), \
+             mock.patch.dict(os.environ, {}, clear=True), \
+             mock.patch("builtins.input", side_effect=["wx123"]), \
+             mock.patch("getpass.getpass", return_value="sec456"):
+            code = wechat_mp.main(["init"])
+            self.assertEqual(code, 0)
+            p = os.path.join(d, ".env")
+            self.assertTrue(os.path.isfile(p))
+            self.assertEqual(os.stat(p).st_mode & 0o777, 0o600)
+            with open(p) as f:
+                content = f.read()
+            self.assertIn("WECHAT_APP_ID=wx123", content)
+            self.assertIn("WECHAT_APP_SECRET=sec456", content)
+
+    def test_init_skips_when_env_set(self):
+        with tempfile.TemporaryDirectory() as d, \
+             mock.patch.object(wechat_mp, "CONFIG_DIR", d), \
+             mock.patch.dict(os.environ, {"WECHAT_APP_ID": "a", "WECHAT_APP_SECRET": "b"}), \
+             mock.patch("builtins.input", side_effect=AssertionError("should not prompt")):
+            code = wechat_mp.main(["init"])
+        self.assertEqual(code, 0)
+        self.assertFalse(os.path.isfile(os.path.join(d, ".env")))
+
+    def test_init_keep_existing(self):
+        with tempfile.TemporaryDirectory() as d, \
+             mock.patch.object(wechat_mp, "CONFIG_DIR", d), \
+             mock.patch.dict(os.environ, {}, clear=True):
+            with open(os.path.join(d, ".env"), "w") as f:
+                f.write("WECHAT_APP_ID=old\nWECHAT_APP_SECRET=olds\n")
+            with mock.patch("builtins.input", side_effect=["n"]):
+                code = wechat_mp.main(["init"])
+            self.assertEqual(code, 0)
+            with open(os.path.join(d, ".env")) as f:
+                self.assertIn("old", f.read())
+
+    def test_doctor_hint_mentions_init(self):
+        with mock.patch.object(wechat_mp, "CONFIG_DIR", "/nonexistent"), \
+             mock.patch.dict(os.environ, {}, clear=True):
+            import io, contextlib
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                wechat_mp.main(["doctor"])
+        self.assertIn("init", buf.getvalue())

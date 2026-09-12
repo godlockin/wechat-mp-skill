@@ -14,6 +14,9 @@ tags: [wechat, weixin, 公众号, api, publish]
 凭证支持两种方式(env 优先):
 
 ```bash
+# 方式 0: 引导式配置(推荐首次使用;Secret 输入不回显,文件自动 chmod 600)
+python3 scripts/wechat_mp.py init
+
 # 方式 1: 项目根目录 .wechat-mp/.env
 mkdir -p .wechat-mp
 cat > .wechat-mp/.env <<'CONF'
