@@ -11,6 +11,8 @@ tags: [wechat, weixin, 公众号, api, publish]
 
 ## 快速开始
 
+> 还没有 AppID/AppSecret? 看申请注册指南: [references/account-setup.md](references/account-setup.md) (注册公众号 → 生成凭证 → IP 白名单 → 权限对照,约 10 分钟)
+
 凭证支持两种方式(env 优先):
 
 ```bash

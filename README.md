@@ -29,8 +29,10 @@
 
 ### 快速开始
 
+> 🆕 没有公众号凭证? 先看 **[申请与注册 AppID/AppSecret 指南](references/account-setup.md)** (个人/企业主体注册、secret 生成、IP 白名单、权限对照)。
+
 ```bash
-# 配置凭证 (二选一)
+# 配置凭证 (二选一;或运行 init 引导配置)
 export WECHAT_APP_ID=wx... export WECHAT_APP_SECRET=...
 # 或写入 .wechat-mp/.env
 
